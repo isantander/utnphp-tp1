@@ -31,4 +31,5 @@ function handleRequest($data, $queryParams, $method) {
         http_response_code(404);
         echo json_encode(['error' => "No se encuentra el handler '$handler'"]);
     }
+    
 }

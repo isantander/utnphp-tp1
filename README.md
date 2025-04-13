@@ -11,7 +11,7 @@ CREATE USER 'tp1'@'localhost' IDENTIFIED BY 'contraseña';
 GRANT ALL PRIVILEGES ON tp1.* TO 'tp1'@'localhost';
 FLUSH PRIVILEGES;
 use tp1;
-source utils\crear_tablas.sql;
+source utils/crear_tablas.sql;
 exit;
 ``` 
 

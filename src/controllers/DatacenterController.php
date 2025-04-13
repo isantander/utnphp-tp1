@@ -19,9 +19,16 @@ function crear_datacenter($data) {
         echo json_encode(['error' => 'Faltan parámetros requeridos']);
         return;
     }
+   
+    $success = crearDatacenter($nombre, $ubicacion, $descripcion);
 
-    
-    echo json_encode(['mensaje' => 'Datacenter creado correctamente'], JSON_PRETTY_PRINT);
+    if ($success) {
+        echo json_encode(['mensaje' => 'Datacenter creado correctamente'], JSON_PRETTY_PRINT);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Error al insertar el datacenter']);
+    }
+
 }
 
 

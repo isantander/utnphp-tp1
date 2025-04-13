@@ -1,14 +1,14 @@
 -- Script de creación de tablas para el inventario de dispositivs 
 
 -- Creacion de la tabla DataCenter (7 atributos)
-CREATE TABLE DataCenter (
+CREATE TABLE Datacenter (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
-    ubicacion VARCHAR(255) DEFAULT NOT NULL,
-    descripcion VARCHAR(255) DEFAULT NOT NULL,
-    deleted TIMESTAMP NULL DEFAULT NULL
+    ubicacion VARCHAR(255)  NOT NULL,
+    descripcion VARCHAR(255)  NOT NULL,
+    deleted TIMESTAMP NULL DEFAULT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Creación tabla Rack (7 atributos)
@@ -21,7 +21,7 @@ CREATE TABLE Rack (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_rack_datacenter FOREIGN KEY (id_datacenter)
-        REFERENCES DataCenter(id)
+        REFERENCES Datacenter(id)
         ON DELETE RESTRICT 
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -30,9 +30,18 @@ CREATE TABLE Rack (
 CREATE TABLE TipoDispositivo (
     id INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
-    deleted TIMESTAMP NULL DEFAULT NULL
+    deleted TIMESTAMP NULL DEFAULT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Creación tabla Fabricante (5 atributos)
+CREATE TABLE Fabricante (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    deleted TIMESTAMP NULL DEFAULT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Creación tabla Dispositivo (13 atributos)
@@ -40,10 +49,10 @@ CREATE TABLE Dispositivo (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_dispositivo INT NOT NULL,
     id_rack INT NOT NULL,
-    id_fabricante VARCHAR(255) DEFAULT NOT NULL,
-    ubicacion_rack VARCHAR(50) DEFAULT NOT NULL,
-    modelo VARCHAR(255) DEFAULT NOT NULL,
-    nro_serie VARCHAR(255) DEFAULT NOT NULL,
+    id_fabricante INT NOT NULL,
+    ubicacion_rack VARCHAR(50)  NOT NULL,
+    modelo VARCHAR(255)  NOT NULL,
+    nro_serie VARCHAR(255)  NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     estado VARCHAR(50) DEFAULT 'activo',
     observaciones VARCHAR(255) DEFAULT NULL,
@@ -64,11 +73,3 @@ CREATE TABLE Dispositivo (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Creación tabla Fabricante (5 atributos)
-CREATE TABLE Fabricante (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    deleted TIMESTAMP NULL DEFAULT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP   
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
