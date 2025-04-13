@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../models/DatacenterModel.php';
+
 
 function listar_datacenter($data) {
     // Data de ejemplo para simular la ddbb

@@ -15,4 +15,13 @@ source utils/crear_tablas.sql;
 exit;
 ``` 
 
+## Inicar composer para instalar las dependencias
+
+```bash
+composer init 
+```
+*Una vez configurado buscar e instalar vlucas/phpdotenv*
+
+
+
 
