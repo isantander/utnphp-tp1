@@ -26,10 +26,10 @@ function handleRequest($data, $queryParams, $method) {
 
     // Verificar si existe la funcion y llamarla
     if (function_exists($handler)) {
-        call_user_func($handler, $data);
+        call_user_func($handler, $data, $method);
     } else {
         http_response_code(404);
         echo json_encode(['error' => "No se encuentra el handler '$handler'"]);
     }
-    
+
 }
