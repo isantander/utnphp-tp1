@@ -1,6 +1,7 @@
 <?php
 
 require_once '../src/router.php';
+require_once '../src/controllers/DatacenterController.php';
 require_once '../src/controllers/DispositivoController.php';
 
 

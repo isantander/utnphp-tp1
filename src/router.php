@@ -11,6 +11,16 @@ function handleRequest($data, $queryParams, $method) {
         return;
     }
 
+    // evitar ataques de ejecucion arbitraria o funciones no deseadas
+    $acciones_permitidas = ['crear', 'listar', 'modificar', 'eliminar', 'obtener'];
+    $entidades_permitidas = ['datacenter', 'dispositivo', 'rack', 'fabricante', 'tipodispositivo'];
+
+    if (!in_array($accion, $acciones_permitidas) || !in_array($entidad, $entidades_permitidas)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Acción o entidad no permitida']);
+        return;
+    }
+
     // Determinar el nombre del handler para simular un controlador
     $handler = "{$accion}_{$entidad}";
 
