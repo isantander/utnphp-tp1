@@ -1,0 +1,17 @@
+{
+  "name": "tp-1",
+  "version": "1.0.0",
+  "description": "## Primero se debe crear la bbdd e importar las tablas del sistema que se encuentran en el directorio utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  }
+}

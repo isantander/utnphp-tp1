@@ -14,7 +14,7 @@ function listar_datacenter() {
     }
 
 }
-
+                              
 function obtener_datacenter($data) {
 
     $id = $data['id'] ?? null;
