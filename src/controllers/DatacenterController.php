@@ -5,7 +5,7 @@ require_once __DIR__ . '/../models/DatacenterModel.php';
 function listar_datacenter() {
 
     $success = listarDatacenter();
-
+ 
     if ($success) {
         echo json_encode($success, JSON_PRETTY_PRINT);
     } else {
