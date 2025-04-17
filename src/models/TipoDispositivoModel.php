@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../db.php';
 
-
 function crearTipoDispositivo($descripcion) {
 
     try {
@@ -20,7 +19,7 @@ function crearTipoDispositivo($descripcion) {
     }
 }
 
-function listarTipoDispositivo() {
+function listarTipoDispositivos() {
     try {
         $pdo = getConnection();
         $stmt = $pdo->prepare("SELECT * FROM TipoDispositivo WHERE deleted IS NULL");

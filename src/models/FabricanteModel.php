@@ -19,7 +19,7 @@ function crearFabricante($nombre) {
     }
 }
 
-function listarFabricante() {
+function listarFabricantes() {
     try {
         $pdo = getConnection();
         $stmt = $pdo->prepare("SELECT * FROM Fabricante WHERE deleted IS NULL");
