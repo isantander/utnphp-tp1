@@ -2,9 +2,7 @@
 
 require_once '../src/router.php';
 require_once '../src/controllers/DataCenterController.php';
-require_once '../src/controllers/TipoDispositivo.php';
-
-
+require_once '../src/controllers/TipoDispositivoController.php';
 
 $input = [];
 $queryParams = [];
