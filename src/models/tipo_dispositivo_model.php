@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../db.php';
 
-function crearTipoDispositivo($descripcion) {
+function model_crear_tipo_dispositivo($descripcion) {
 
     try {
         $pdo = getConnection();
@@ -12,14 +12,45 @@ function crearTipoDispositivo($descripcion) {
         ");
         
         $stmt->bindParam(':descripcion', $descripcion);
-        return $stmt->execute();
+        
+        if ($stmt->execute()) {
+            return $pdo->lastInsertId();
+        }
+        
+        return false;
+
     } catch (PDOException $e) {
         error_log("Error al insertar tipo dispositivo: " . $e->getMessage());
         return false;
     }
 }
 
-function listarTipoDispositivos() {
+function model_modificar_tipo_dispositivo($id,$descripcion) {
+
+    try {
+        $pdo = getConnection();
+        $stmt = $pdo->prepare("
+            UPDATE TipoDispositivo SET 
+                descripcion = :descripcion
+            WHERE id = :id AND deleted IS NULL
+        ");
+        
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':descripcion', $descripcion);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return 0;
+        }
+
+    } catch (PDOException $e) {
+        return false;
+    }
+    
+}
+function model_listar_tipo_dispositivos() {
     try {
         $pdo = getConnection();
         $stmt = $pdo->prepare("SELECT * FROM TipoDispositivo WHERE deleted IS NULL");
@@ -31,7 +62,7 @@ function listarTipoDispositivos() {
     }
 }
 
-function obtenerTipoDispositivo($id) {
+function model_obtener_tipo_dispositivo($id) {
     try {
         $pdo = getConnection();
         $stmt = $pdo->prepare("SELECT * FROM TipoDispositivo WHERE id = :id AND deleted IS NULL");
@@ -44,7 +75,7 @@ function obtenerTipoDispositivo($id) {
     }
 }
 
-function eliminarTipoDispositivo($id) {
+function model_eliminar_tipo_dispositivo($id) {
     try {
         $pdo = getConnection();
         $stmt = $pdo->prepare("DELETE FROM TipoDispositivo WHERE id = :id");

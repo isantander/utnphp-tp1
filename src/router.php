@@ -22,7 +22,7 @@ function handleRequest($data, $queryParams, $method) {
     }
 
     // Determinar el nombre del handler para simular un controlador
-    $handler = "{$accion}_{$entidad}";
+    $handler = "controller_{$accion}_{$entidad}";
 
     // Verificar si existe la funcion y llamarla
     if (function_exists($handler)) {

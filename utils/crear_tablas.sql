@@ -47,7 +47,7 @@ CREATE TABLE Fabricante (
 -- Creación tabla Dispositivo (13 atributos)
 CREATE TABLE Dispositivo (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_dispositivo INT NOT NULL,
+    id_tipo_dispositivo INT NOT NULL,
     id_rack INT NOT NULL,
     id_fabricante INT NOT NULL,
     ubicacion_rack VARCHAR(50)  NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE Dispositivo (
         REFERENCES Rack(id)
         ON DELETE RESTRICT 
         ON UPDATE CASCADE,
-    CONSTRAINT fk_dispositivo_tipo FOREIGN KEY (id_dispositivo)
+    CONSTRAINT fk_tipo_dispositivo_tipo FOREIGN KEY (id_tipo_dispositivo)
         REFERENCES TipoDispositivo(id)
         ON DELETE RESTRICT 
         ON UPDATE CASCADE,

@@ -1,8 +1,13 @@
 <?php
 
 require_once '../src/router.php';
-require_once '../src/controllers/DataCenterController.php';
-require_once '../src/controllers/TipoDispositivoController.php';
+require_once '../src/controllers/datacenter_controller.php';
+require_once '../src/controllers/tipo_dispositivo_controller.php';
+require_once '../src/controllers/fabricante_controller.php';
+require_once '../src/controllers/rack_controller.php';
+require_once '../src/controllers/dispositivo_controller.php';
+require_once '../src/helpers/utils.php';
+
 
 $input = [];
 $queryParams = [];
@@ -20,8 +25,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     default:
-        http_response_code(405);
-        echo json_encode(['error' => 'Método no permitido']);
+        json_response(['error' => 'Método no permitido'], 405);
         exit;
 }
 
