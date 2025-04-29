@@ -57,7 +57,7 @@ function model_modificar_datacenter($id,$nombre, $ubicacion, $descripcion) {
 
 }
 
-function model_listar_datacenter() {
+/* function model_listar_datacenter() {
 
     try {
         $pdo = getConnection();
@@ -69,7 +69,31 @@ function model_listar_datacenter() {
         return [];
     }
 
+} */
+
+function model_listar_datacenter($limit, $offset) {
+    try {
+        $pdo = getConnection();
+
+        $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Datacenter WHERE deleted IS NULL");
+        $total = (int)$stmtTotal->fetchColumn();
+
+        $stmt = $pdo->prepare("SELECT * FROM Datacenter WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+            'total' => $total
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
 }
+
 
 function model_obtener_datacenter($id) {
 

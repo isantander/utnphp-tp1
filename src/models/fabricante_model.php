@@ -44,7 +44,7 @@ function model_modificar_fabricante($id,$nombre) {
     }
 }
 
-function model_listar_fabricantes() {
+/* function model_listar_fabricantes() {
 
     try {
         $pdo = getConnection();
@@ -55,6 +55,31 @@ function model_listar_fabricantes() {
     } catch (PDOException $e) {
         return false;
     }
+} */
+
+function model_listar_fabricante($limit, $offset) {
+
+    try {
+        $pdo = getConnection();
+
+        $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Fabricante WHERE deleted IS NULL");
+        $total = (int)$stmtTotal->fetchColumn();
+
+        $stmt = $pdo->prepare("SELECT * FROM Fabricante WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+            'total' => $total
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
+    
 }
 
 function model_obtener_fabricante($id) {
@@ -80,6 +105,7 @@ function model_eliminar_fabricante($id) {
         $stmt->bindParam(':id', $id);
 
         return $stmt->execute();
+        
     } catch (PDOException $e) {
         error_log("Error al eliminar fabricante: " . $e->getMessage());
         return false;

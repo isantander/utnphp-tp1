@@ -142,5 +142,20 @@ function controller_eliminar_dispositivo($data, $method) {
     catch(Exception $e){
         json_response(null,500);
     }
+}
+
+function controller_listar_dispositivo($data, $method) {
+
+
+    $page = $data['page'] ?? 1;
+    $limit = $data['limit'] ?? 10;
+
+    $respuesta = service_listar_dispositivos($page, $limit);
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
 
 }

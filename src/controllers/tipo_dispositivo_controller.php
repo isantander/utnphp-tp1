@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/tipo_dispositivo_model.php';
+require_once __DIR__ . '/../services/tipo_dispositivo_service.php';
 
 function controller_crear_tipodispositivo($data, $method) {
 
@@ -57,7 +58,7 @@ function controller_modificar_tipodispositivo($data, $method) {
 
 }
 
-function model_listar_tipodispositivos() {
+/* function controller_listar_tipodispositivos() {
 
     $success = model_listar_tipo_dispositivos();
 
@@ -66,9 +67,25 @@ function model_listar_tipodispositivos() {
     } else {
         json_response(null,404);
     }
+} */
+
+function controller_listar_tipodispositivo($data, $method) {
+
+
+    $page = $data['page'] ?? 1;
+    $limit = $data['limit'] ?? 10;
+
+    $respuesta = service_listar_tipo_dispositivo($page, $limit);
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
 }
 
-function model_obtener_tipodispositivo($data) {
+
+function controller_obtener_tipodispositivo($data) {
 
     $id = $data['id'] ?? null;
 
@@ -86,31 +103,40 @@ function model_obtener_tipodispositivo($data) {
     }
 }
 
-
-// Todos los deletes quedan para el final
-/* function model_eliminar_tipodispositivo($data, $method) {
+function controller_eliminar_tipodispositivo($data, $method) {
 
     if ($method !== 'POST') {
-        http_response_code(405);
-        echo json_encode(['error' => 'Metodo no permitido']);
+        json_response(null,405);
         return;
     }
 
     $id = $data['id'] ?? null;
 
     if (!$id) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Faltan parámetros requeridos']);
+        json_response(null,400);
         return;
     }
 
-    $success = model_eliminar_tipo_dispositivo($id);
-    
-    if ($success) {
-        echo json_encode(['mensaje' => 'Tipo de dispositivo eliminado correctamente'], JSON_PRETTY_PRINT);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Error al eliminar el tipo de dispositivo']);
+    try {
+
+        $respuesta = service_eliminar_tipo_dispositivo($id);
+
+        if ($respuesta === 0) {
+            json_response(null,404);
+            return;
+        }elseif ($respuesta === true) {
+            json_response(['mensaje' => 'Tipo Dispositivo borrado correctamente'],200);
+        }else{
+            json_response(null,500);
+        }
+
     }
-} */
+    catch(TipoDispositivoException $e) {
+        json_response(['error' => $e->getMessage()], 409);
+    }
+    catch (Exception $e) {
+        json_response(['error' => $e->getMessage()], 500);
+    }
+    
+}
 

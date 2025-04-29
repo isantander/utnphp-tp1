@@ -86,3 +86,77 @@ function model_eliminar_dispositivo($id) {
     }   
 
 }
+
+function model_dispositivo_existe_en_rack($id_rack){
+
+    try {
+        
+        $pdo = getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM Dispositivo WHERE id_rack = :id_rack and deleted IS NULL");
+        $stmt->bindParam(':id_rack', $id_rack);
+        $stmt->execute();
+
+        return (bool) $stmt->fetchColumn();
+
+    } catch (PDOException $e) {
+        return false;
+    }
+
+}
+
+function model_dispositivo_existe_en_tipo_dispositivo($id_tipo_dispositivo){
+
+    try {
+        
+        $pdo = getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM Dispositivo WHERE id_tipo_dispositivo = :id_tipo_dispositivo and deleted IS NULL");
+        $stmt->bindParam(':id_tipo_dispositivo', $id_tipo_dispositivo);
+        $stmt->execute();
+
+        return (bool) $stmt->fetchColumn();
+
+    } catch (PDOException $e) {
+        return false;
+    }
+
+}
+
+function model_dispositivo_existe_en_fabricante($id_fabricante){
+
+    try {
+        
+        $pdo = getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM Dispositivo WHERE id_fabricante = :id_fabricante and deleted IS NULL");
+        $stmt->bindParam(':id_fabricante', $id_fabricante);
+        $stmt->execute();
+
+        return (bool) $stmt->fetchColumn();
+
+    } catch (PDOException $e) {
+        return false;
+    }
+
+}
+
+function model_listar_dispositivos($limit, $offset) {
+    try {
+        $pdo = getConnection();
+
+        $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Dispositivo WHERE deleted IS NULL");
+        $total = (int)$stmtTotal->fetchColumn();
+
+        $stmt = $pdo->prepare("SELECT * FROM Dispositivo WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+            'total' => $total
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
+}

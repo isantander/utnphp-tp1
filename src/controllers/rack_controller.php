@@ -76,7 +76,7 @@ function controller_modificar_rack($data, $method) {
     }
 }
 
-function controller_listar_rack() {
+/* function controller_listar_rack() {
 
     $success = model_listar_racks();
 
@@ -85,6 +85,22 @@ function controller_listar_rack() {
     } else {
         json_response(null,404);
     }
+} */
+
+
+function controller_listar_rack($data, $method) {
+
+    $page = $data['page'] ?? 1;
+    $limit = $data['limit'] ?? 10;
+
+    $respuesta = service_listar_rack($page, $limit);
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
+    
 }
 
 function controller_obtener_rack($data, $method) {
@@ -117,29 +133,38 @@ function controller_obtener_rack($data, $method) {
 }
 
 
-// Depende de otras entidades su eliminación 
-/* function controller_eliminar_rack($data, $method) {
+function controller_eliminar_rack($data, $method) {
 
     if ($method !== 'POST') {
-        http_response_code(405);
-        echo json_encode(['error' => 'Metodo no permitido']);
+        json_response(null,405);
         return;
     }
 
     $id = $data['id'] ?? null;
 
     if (!$id) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Faltan parámetros requeridos']);
+        json_response(null,400);
         return;
     }
 
-    $success = model_eliminar_rack($id);
+    try {
 
-    if ($success) {
-        echo json_encode(['mensaje' => 'Rack eliminado correctamente'], JSON_PRETTY_PRINT);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Error al eliminar el rack']);
+        $respuesta = service_eliminar_rack($id);
+
+        if ($respuesta === 0) {
+            json_response(null,404);
+            return;
+        }elseif ($respuesta === true) {
+            json_response(['mensaje' => 'Rack borrado correctamente'],200);
+        }else{
+            json_response(null,500);
+        }
+
     }
-} */
+    catch (RackAsociadoException $e) {
+        json_response(['error' => $e->getMessage()], 409);
+    }
+    catch (Exception $e) {
+        json_response(null,500);
+    }
+}

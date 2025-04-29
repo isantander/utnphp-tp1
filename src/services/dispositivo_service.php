@@ -41,3 +41,27 @@ function service_modificar_dispositivo($id, $id_tipo_dispositivo, $id_rack, $id_
     return model_modificar_dispositivo($id, $id_tipo_dispositivo, $id_rack, $id_fabricante, $ubicacion_rack, $modelo, $nro_serie, $nombre, $estado, $observaciones);
 
 }
+
+function service_listar_dispositivos($page, $limit) {
+
+    $page = max(1, (int)$page);
+    $limit = max(1, min(100, (int)$limit));
+    $offset = ($page - 1) * $limit;
+
+    $resultados = model_listar_dispositivos($limit, $offset);
+
+    if ($resultados === false) {
+        return false;
+    }
+
+    $totalPages = (int)ceil($resultados['total'] / $limit);
+
+    return [
+        'data' => $resultados['data'],
+        'total' => $resultados['total'],
+        'page' => $page,
+        'limit' => $limit,
+        'pages' => $totalPages
+    ];
+    
+}

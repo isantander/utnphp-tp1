@@ -56,7 +56,7 @@ function model_modificar_rack($id,$id_datacenter, $numero, $descripcion) {
     }
 }
 
-function model_listar_racks() {
+/* function model_listar_racks() {
     try {
         $pdo = getConnection();
         $stmt = $pdo->prepare("SELECT * FROM Rack WHERE deleted IS NULL");
@@ -65,7 +65,32 @@ function model_listar_racks() {
     } catch (PDOException $e) {
         return false;
     }
+} */
+
+function model_listar_rack($limit, $offset) {
+    
+    try {
+        $pdo = getConnection();
+
+        $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Rack WHERE deleted IS NULL");
+        $total = (int)$stmtTotal->fetchColumn();
+
+        $stmt = $pdo->prepare("SELECT * FROM Rack WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+            'total' => $total
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
 }
+
 
 function model_obtener_rack($id) {
     try {

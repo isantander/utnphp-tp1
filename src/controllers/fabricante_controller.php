@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/fabricante_model.php';
+require_once __DIR__ . '/../services/fabricante_service.php';
 
 function controller_crear_fabricante($data, $method) {
     if ($method !== 'POST') {
@@ -56,10 +57,9 @@ function controller_modificar_fabricante($data, $method) {
         json_response(['error' => 'Fabricante no encontrado o no se pudo modificar'],404);
     }
 
-
 }
 
-function controller_listar_fabricante() {
+/* function controller_listar_fabricante() {
 
     $success = model_listar_fabricantes();
 
@@ -68,6 +68,21 @@ function controller_listar_fabricante() {
     } else {
         json_response(null,404);
     }
+} */
+
+function controller_listar_fabricante($data, $method) {
+
+    $page = $data['page'] ?? 1;
+    $limit = $data['limit'] ?? 10;
+
+    $respuesta = service_listar_fabricante($page, $limit);
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
+    
 }
 
 function controller_obtener_fabricante($data) {
@@ -89,8 +104,7 @@ function controller_obtener_fabricante($data) {
 }
 
 
-// 
-/* function controller_eliminar_fabricante($data, $method) {
+function controller_eliminar_fabricante($data, $method) {
 
     if ($method !== 'POST') {
         json_response(null,405);
@@ -104,12 +118,15 @@ function controller_obtener_fabricante($data) {
         return;
     }
 
-    $success = model_eliminar_fabricante($id);
+    try {
 
-    if ($success) {
-        echo json_encode(['mensaje' => 'Fabricante eliminado correctamente'], JSON_PRETTY_PRINT);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Error al eliminar el fabricante']);
+        $respuesta = service_eliminar_fabricante($id);
+
+        print_r($respuesta);
+    }catch(Exception $e) {
+        json_response(null, 500);
     }
-} */
+
+
+
+}
