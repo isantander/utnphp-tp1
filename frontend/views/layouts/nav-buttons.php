@@ -9,23 +9,23 @@ global $entity;
 ?>
 
 <div class="flex flex-wrap justify-center gap-6 mb-12">
-    <a href="<?php echo BASE_URL; ?>/listar/datacenter" 
+    <a href="<?php echo BASE_URL; ?>/datacenter/listar" 
        class="nav-btn bg-gradient-to-br from-blue-500 to-blue-600 <?php echo isActive($entity, 'datacenters'); ?>">
         <i class="mr-2 fas fa-server"></i> Datacenter
     </a>
-    <a href="<?php echo BASE_URL; ?>/listar/rack" 
+    <a href="<?php echo BASE_URL; ?>/rack/listar" 
        class="nav-btn bg-gradient-to-br from-green-500 to-green-600 <?php echo isActive($entity, 'racks'); ?>">
         <i class="mr-2 fas fa-layer-group"></i> Rack
     </a>
-    <a href="<?php echo BASE_URL; ?>/listar/fabricante" 
+    <a href="<?php echo BASE_URL; ?>/fabricante/listar" 
        class="nav-btn bg-gradient-to-br from-purple-500 to-purple-600 <?php echo isActive($entity, 'fabricantes'); ?>">
         <i class="mr-2 fas fa-industry"></i> Fabricantes
     </a>
-    <a href="<?php echo BASE_URL; ?>/listar/tipo-dispositivo" 
-       class="nav-btn bg-gradient-to-br from-amber-500 to-amber-600 <?php echo isActive($entity, 'tipo-dispositivos'); ?>">
+    <a href="<?php echo BASE_URL; ?>/tipodispositivo/listar" 
+       class="nav-btn bg-gradient-to-br from-amber-500 to-amber-600 <?php echo isActive($entity, 'tipodispositivos'); ?>">
         <i class="mr-2 fas fa-laptop-code"></i> Tipo Dispositivos
     </a>
-    <a href="<?php echo BASE_URL; ?>/listar/dispositivo" 
+    <a href="<?php echo BASE_URL; ?>/dispositivo/listar" 
        class="nav-btn bg-gradient-to-br from-red-500 to-red-600 <?php echo isActive($entity, 'dispositivos'); ?>">
         <i class="mr-2 fas fa-network-wired"></i> Dispositivos
     </a>

@@ -145,7 +145,15 @@ function model_listar_dispositivos($limit, $offset) {
         $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Dispositivo WHERE deleted IS NULL");
         $total = (int)$stmtTotal->fetchColumn();
 
-        $stmt = $pdo->prepare("SELECT * FROM Dispositivo WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        $stmt = $pdo->prepare("SELECT D.id as id, DC.nombre as datacenter, TD.descripcion as descripcion_td, R.descripcion as descripcion_rack, 
+                                             F.nombre as nombre_fabricante, D.Ubicacion_rack, D.modelo, D.nro_serie, D.nombre, D.estado, D.observaciones
+                                        FROM Dispositivo as D
+                                        INNER JOIN Fabricante as F ON D.id_fabricante = F.id
+                                        INNER JOIN TipoDispositivo as TD ON D.id_tipo_dispositivo = TD.id
+                                        INNER JOIN Rack as R ON D.id_rack = R.id
+                                        INNER JOIN Datacenter as DC ON R.id_datacenter = DC.id
+                                        WHERE D.deleted IS NULL 
+                                        LIMIT :limit OFFSET :offset");
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();

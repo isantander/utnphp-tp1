@@ -1,6 +1,7 @@
 <?php
 
 function fetchApiData($entidad, $page = 1, $limit = 5) {
+    
     $url = "http://127.0.0.1:8000/api/index.php?accion=listar&entidad=$entidad&limit=$limit&page=$page";
     
     $ch = curl_init();
@@ -53,13 +54,13 @@ function buildPagination($data, $entidad) {
                     <div class="flex space-x-2">';
     
     if ($data['page'] > 1) {
-        $html .= '<a href="' . BASE_URL . '/listar/' . $entidad . '/' . ($data['page'] - 1) . '" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md bg-white text-gray-700 hover:bg-gray-50">
+        $html .= '<a href="' . BASE_URL . '/' . $entidad . '/listar/'  . ($data['page'] - 1) . '" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md bg-white text-gray-700 hover:bg-gray-50">
                     Anterior
                  </a>';
     }
     
     if ($data['page'] < $data['pages']) {
-        $html .= '<a href="' . BASE_URL . '/listar/' . $entidad . '/' . ($data['page'] + 1) . '" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md bg-white text-gray-700 hover:bg-gray-50">
+        $html .= '<a href="' . BASE_URL . '/' . $entidad .  '/listar/' . ($data['page'] + 1) . '" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md bg-white text-gray-700 hover:bg-gray-50">
                     Siguiente
                  </a>';
     }
@@ -68,4 +69,3 @@ function buildPagination($data, $entidad) {
     
     return $html;
 }
-?>

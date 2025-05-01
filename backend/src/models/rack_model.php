@@ -75,7 +75,11 @@ function model_listar_rack($limit, $offset) {
         $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Rack WHERE deleted IS NULL");
         $total = (int)$stmtTotal->fetchColumn();
 
-        $stmt = $pdo->prepare("SELECT * FROM Rack WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        //$stmt = $pdo->prepare("SELECT  FROM Rack WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
+        $stmt = $pdo->prepare("SELECT R.id, D.nombre as datacenter, R.numero, R.descripcion 
+                                        FROM Rack as R
+                                        INNER JOIN Datacenter as D ON R.id_datacenter = D.id
+                                        WHERE R.deleted IS NULL LIMIT :limit OFFSET :offset");
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();

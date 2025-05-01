@@ -4,8 +4,8 @@ define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST']);
 $request = $_SERVER['REQUEST_URI'];
 $baseURL = array_filter(explode('/', $request));
 
-$accion = $baseURL[1] ?? 'home';
-$entidad = $baseURL[2] ?? 'menu';
+$entidad = $baseURL[1] ?? 'menu';
+$accion = $baseURL[2] ?? 'home';
 $id = $baseURL[3] ?? null;
 
 $acciones_permitidas = ['home','listar', 'obtener', 'crear', 'modificar', 'eliminar'];
