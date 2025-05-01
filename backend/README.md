@@ -24,40 +24,9 @@ composer init
 
 
 
-## Instalar tailwindcss
+## Probar el sistema con el servidor web integrado a PHP
 
 ```bash
-npm init -y
-npm install -D tailwindcss@^3.4 postcss autoprefixer
-npx tailwindcss init -p
-```
-### Editar el archivo tailwind.config.js y agregar :
-
-```js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./**/*.html",
-    "./**/*.php",
-    "./resources/**/*.js",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
+php -S localhost:8000
 ```
 
-### Crear el archivo css base resource/css/app.css
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-### Compilar con tailwindcss
-
-```bash
-npx tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --watch
-npm install flowbite
-```
