@@ -304,42 +304,14 @@ class ApiTest extends TestCase
         $this->assertArrayHasKey('mensaje', $resp['body']);
     }
 
+    public function test_19_EliminarDispositivo(){
 
-/*    
-    public function test_03_CrearFabricante()
-    {
-        $resp = $this->post('crear', 'fabricante', [
-            'nombre' => 'Cisco'
+        $resp = $this->post('eliminar', 'dispositivo', [
+            'id' => self::$dispostivoId
         ]);
-        $this->assertArrayHasKey('id', $resp);
-        self::$fabricanteId = $resp['id'];
+
+        $this->assertEquals(200, $resp['http_code']);
     }
 
-    public function test_04_CrearTipoDispositivo()
-    {
-        $resp = $this->post('crear', 'tipodispositivo', [
-            'descripcion' => 'Switch'
-        ]);
-        $this->assertArrayHasKey('id', $resp);
-        self::$tipoId = $resp['id'];
-    }
-
-    public function test_05_ModificarDatacenter()
-    {
-        $resp = $this->post('modificar', 'datacenter', [
-            'id' => self::$datacenterId,
-            'nombre' => 'DC Test Modificado',
-            'ubicacion' => 'Ubicación XZX',
-            'descripcion' => 'Nueva desc XZX'
-        ]);
-        $this->assertArrayHasKey('mensaje', $resp);
-        echo ">>>>>>" . $resp['mensaje'];
-    }
-
-    public function test_06_EliminarDatacenter()
-    {
-        $resp = $this->post('eliminar', 'datacenter', ['id' => self::$datacenterId]);
-        $this->assertArrayHasKey('mensaje', $resp);
-        echo ">>>" . $resp['mensaje'];
-    } */
+    
 }

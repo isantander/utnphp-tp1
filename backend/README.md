@@ -59,4 +59,5 @@ module.exports = {
 
 ```bash
 npx tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --watch
+npm install flowbite
 ```
