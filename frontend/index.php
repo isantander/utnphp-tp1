@@ -27,6 +27,7 @@ require_once 'views/layouts/nav-buttons.php';
 
 // vista en caso de existir
 if (file_exists($vista)) {
+    $page = $id;
     require_once $vista;
 } else {
     echo '<div class="text-center py-10">

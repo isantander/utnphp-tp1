@@ -9,23 +9,23 @@ global $entity;
 ?>
 
 <div class="flex flex-wrap justify-center gap-6 mb-12">
-    <a href="<?php echo BASE_URL; ?>/datacenters" 
+    <a href="<?php echo BASE_URL; ?>/listar/datacenter" 
        class="nav-btn bg-gradient-to-br from-blue-500 to-blue-600 <?php echo isActive($entity, 'datacenters'); ?>">
         <i class="mr-2 fas fa-server"></i> Datacenter
     </a>
-    <a href="<?php echo BASE_URL; ?>/racks" 
+    <a href="<?php echo BASE_URL; ?>/listar/rack" 
        class="nav-btn bg-gradient-to-br from-green-500 to-green-600 <?php echo isActive($entity, 'racks'); ?>">
         <i class="mr-2 fas fa-layer-group"></i> Rack
     </a>
-    <a href="<?php echo BASE_URL; ?>/fabricantes" 
+    <a href="<?php echo BASE_URL; ?>/listar/fabricante" 
        class="nav-btn bg-gradient-to-br from-purple-500 to-purple-600 <?php echo isActive($entity, 'fabricantes'); ?>">
         <i class="mr-2 fas fa-industry"></i> Fabricantes
     </a>
-    <a href="<?php echo BASE_URL; ?>/tipo-dispositivos" 
+    <a href="<?php echo BASE_URL; ?>/listar/tipo-dispositivo" 
        class="nav-btn bg-gradient-to-br from-amber-500 to-amber-600 <?php echo isActive($entity, 'tipo-dispositivos'); ?>">
         <i class="mr-2 fas fa-laptop-code"></i> Tipo Dispositivos
     </a>
-    <a href="<?php echo BASE_URL; ?>/dispositivos" 
+    <a href="<?php echo BASE_URL; ?>/listar/dispositivo" 
        class="nav-btn bg-gradient-to-br from-red-500 to-red-600 <?php echo isActive($entity, 'dispositivos'); ?>">
         <i class="mr-2 fas fa-network-wired"></i> Dispositivos
     </a>
