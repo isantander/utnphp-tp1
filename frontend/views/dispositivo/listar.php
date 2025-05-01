@@ -26,7 +26,6 @@ if (!$data || isset($data['error'])) {
 // Configurar columnas
 $columns = [
     ['title' => 'ID', 'field' => 'id', 'type' => 'number'],
-    ['title' => 'DataCenter', 'field' => 'datacenter', 'type' => 'text'],
     ['title' => 'Rack', 'field' => 'descripcion_rack', 'type' => 'text'],
     ['title' => 'Tipo Dispositivo', 'field' => 'descripcion_td', 'type' => 'text'],
     ['title' => 'Fabricante', 'field' => 'nombre_fabricante', 'type' => 'text'],
@@ -49,7 +48,7 @@ echo '<div class="bg-white rounded-lg shadow overflow-hidden">
                 <h2 class="text-xl font-semibold text-gray-800">Dispositivos</h2>
                 <p class="text-sm text-gray-500 mt-1">Total: ' . $data['total'] . ' dispositivos</p>
             </div>
-            <a href="' . BASE_URL . '/datacenters/create" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+            <a href="' . BASE_URL . '/dispositivo/crear" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                 <i class="fas fa-plus mr-2"></i>Nuevo Dispositivo
             </a>
         </div>';
