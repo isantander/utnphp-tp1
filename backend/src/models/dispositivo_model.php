@@ -168,3 +168,21 @@ function model_listar_dispositivos($limit, $offset) {
         return false;
     }
 }
+
+
+function model_obtener_dispositivo($id) {
+
+    try {
+        $pdo = getConnection();
+        $stmt = $pdo->prepare("SELECT id, id_rack, id_fabricante, id_tipo_dispositivo, ubicacion_rack, modelo, nro_serie, nombre, estado, observaciones 
+                                FROM Dispositivo WHERE id = :id and deleted IS NULL");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        return false;
+    }
+
+}

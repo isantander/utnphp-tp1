@@ -8,24 +8,31 @@ $entidad = $baseURL[1] ?? 'menu';
 $accion = $baseURL[2] ?? 'home';
 $id = $baseURL[3] ?? null;
 
-$acciones_permitidas = ['home','listar', 'obtener', 'crear', 'modificar', 'eliminar'];
+$acciones_permitidas = ['home','listar', 'obtener', 'crear', 'modificar', 'eliminar','confirmar-borrado'];
 $entidades_permitidas = ['menu','datacenter', 'dispositivo', 'rack', 'fabricante', 'tipodispositivo'];
 
-if (!in_array($accion, $acciones_permitidas) || !in_array($entidad, $entidades_permitidas)) {
-    echo '<div class="text-center py-10">
+if ( !in_array($accion, $acciones_permitidas) || 
+     !in_array($entidad, $entidades_permitidas)) {
+    
+        echo '<div class="text-center py-10">
             <h2 class="text-2xl font-semibold text-gray-700">Error: 404</h2>
           </div>';
     return;
+
 }
 
+//armo la ruta a la vista
 $vista = "views/$entidad/$accion.php";
+echo $vista;
+
 
 //header
 require_once 'views/layouts/header.php';
+
 // barra navegación
 require_once 'views/layouts/nav-buttons.php';
 
-// vista en caso de existir
+// si existe carga la url solicitada, sino muestra mensaje de pagina inexistente 
 if (file_exists($vista)) {
     $page = $id;
     require_once $vista;
@@ -37,6 +44,6 @@ if (file_exists($vista)) {
 }
 
 
-// footer
+// footer - no tiene nada por ahora
 require_once 'views/layouts/footer.php';
 

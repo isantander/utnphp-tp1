@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../../resources/utils/helpers.php'; 
 
-$limit = 5;
+$limit = 5; // para limitar cantidad de filas en la oaginación 
 
-// Obtener datos de la API
+// consulta la API
 $data = fetchApiData('dispositivo', $page, $limit);
 
 if (!$data || isset($data['error'])) {
@@ -23,7 +23,7 @@ if (!$data || isset($data['error'])) {
     return;
 }
 
-// Configurar columnas
+// data columnas
 $columns = [
     ['title' => 'ID', 'field' => 'id', 'type' => 'number'],
     ['title' => 'Rack', 'field' => 'descripcion_rack', 'type' => 'text'],
@@ -35,9 +35,9 @@ $columns = [
     ['title' => 'Estado', 'field' => 'estado', 'type' => 'text'],
     ['title' => 'Observaciones', 'field' => 'observaciones', 'type' => 'text'],
     ['title' => 'Acciones', 'type' => 'actions', 'actions' => [
-        ['icon' => 'eye', 'color' => 'blue', 'url' => BASE_URL . '/dispositivo/show/'],
-        ['icon' => 'edit', 'color' => 'yellow', 'url' => BASE_URL . '/dispositivo/edit/'],
-        ['icon' => 'trash', 'color' => 'red', 'url' => BASE_URL . '/dispositivo/delete/']
+        ['icon' => 'eye', 'color' => 'blue', 'url' => BASE_URL . '/dispositivo/mostrar/'],
+        ['icon' => 'edit', 'color' => 'yellow', 'url' => BASE_URL . '/dispositivo/modificar/'],
+        ['icon' => 'trash', 'color' => 'red', 'url' => BASE_URL . '/dispositivo/confirmar-borrado/']
     ]]
 ];
 

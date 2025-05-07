@@ -159,3 +159,23 @@ function controller_listar_dispositivo($data, $method) {
     }
 
 }
+
+
+function controller_obtener_dispositivo($data, $method) {
+
+    $id = $data['id'] ?? null;
+
+    if (!$id) {
+        json_response(null,400);
+        return;
+    }
+
+    $respuesta = model_obtener_dispositivo($id);
+
+    if ($respuesta === false) {
+        json_response(null, 404);
+    } else {
+        json_response(['data' =>$respuesta], 200);
+    }
+
+}
