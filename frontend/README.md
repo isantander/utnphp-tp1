@@ -1,6 +1,5 @@
 # Instrucciones para la instalación del Sistema
 
-
 ## Instalar tailwindcss
 
 ```bash
