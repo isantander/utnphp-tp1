@@ -4,47 +4,21 @@
 
 ```bash
 npm init -y
-npm install -D tailwindcss@^3.4 postcss autoprefixer
-npx tailwindcss init -p
-```
-### Editar el archivo tailwind.config.js y agregar :
-
-```js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-    content: [
-      "./node_modules/flowbite/**/*.js",
-      "./index.php",
-      "./views/**/*.php",
-      "./resources/utils/*.php"
-    ],
-    theme: {
-      extend: {},
-    },
-    plugins: [
-      require('flowbite/plugin') 
-    ],
-  }
+npm install
 ```
 
-### Crear el archivo css base resource/css/app.css
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
 ### Compilar con tailwindcss
 
 ```bash
-npx tailwindcss -i ./resources/css/app.css -o ./views/public/css/style.css --watch
-o
 npm run build
 ```
 
-## Instalar el framework Flowbite
+#### Levantar el servidor con
 
 ```bash
-npm install flowbite
+php -S localhost:8080
 ```
+*El proyecto será accesible ingresando en http://localhost:8080*
+
+
 
