@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold mb-6 text-center">Crear Nuevo Dispositivo</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">Crear Nuevo Datacenter</h2>
     <form method="POST" class="space-y-5">
 
         <div>
