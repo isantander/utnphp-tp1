@@ -30,9 +30,9 @@ $columns = [
     ['title' => 'Ubicación', 'field' => 'ubicacion', 'type' => 'text'],
     ['title' => 'Descripción', 'field' => 'descripcion', 'type' => 'text'],
     ['title' => 'Acciones', 'type' => 'actions', 'actions' => [
-        ['icon' => 'eye', 'color' => 'blue', 'url' => BASE_URL . '/datacenter/show/'],
-        ['icon' => 'edit', 'color' => 'yellow', 'url' => BASE_URL . '/datacenter/edit/'],
-        ['icon' => 'trash', 'color' => 'red', 'url' => BASE_URL . '/datacenter/delete/']
+        ['icon' => 'eye', 'color' => 'blue', 'url' => BASE_URL . '/datacenter/mostrar/'],
+        ['icon' => 'edit', 'color' => 'yellow', 'url' => BASE_URL . '/datacenter/modificar/'],
+        ['icon' => 'trash', 'color' => 'red', 'url' => BASE_URL . '/datacenter/confirmar-borrado/']
     ]]
 ];
 
@@ -43,7 +43,7 @@ echo '<div class="bg-white rounded-lg shadow overflow-hidden">
                 <h2 class="text-xl font-semibold text-gray-800">Datacenters</h2>
                 <p class="text-sm text-gray-500 mt-1">Total: ' . $data['total'] . ' datacenters</p>
             </div>
-            <a href="' . BASE_URL . '/datacenters/create" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+            <a href="' . BASE_URL . '/datacenter/crear" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                 <i class="fas fa-plus mr-2"></i>Nuevo Datacenter
             </a>
         </div>';

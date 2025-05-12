@@ -12,7 +12,7 @@ function handleRequest($data, $queryParams, $method) {
     }
 
     // evitar ataques de ejecucion arbitraria o funciones no deseadas
-    $acciones_permitidas = ['crear', 'listar', 'modificar', 'eliminar', 'obtener'];
+    $acciones_permitidas = ['crear', 'listar', 'modificar', 'eliminar', 'obtener','listarTodo'];
     $entidades_permitidas = ['datacenter', 'dispositivo', 'rack', 'fabricante', 'tipodispositivo'];
 
     if (!in_array($accion, $acciones_permitidas) || !in_array($entidad, $entidades_permitidas)) {

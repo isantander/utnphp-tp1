@@ -103,6 +103,18 @@ function controller_listar_rack($data, $method) {
     
 }
 
+function controller_listarTodo_rack($data, $method) {
+
+    $respuesta = model_listarTodo_rack();
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
+    
+}
+
 function controller_obtener_rack($data, $method) {
 
     if ($method !== 'POST') {

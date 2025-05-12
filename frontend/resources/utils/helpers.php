@@ -104,3 +104,30 @@ function buildPagination($data, $entidad) {
     
     return $html;
 }
+
+// Esto debería ser una función genérica
+function deleteDatacenter($id) {
+    
+    $id = intval($_POST['id']);
+    $url = "http://localhost:8000/api/index.php?accion=eliminar&entidad=datacenter";
+    
+    $payload = json_encode([
+        "id" => $id,
+        "apykey" => "kjasiuaSHDIUASHDIAUSDASDASD23123123"  // Esto es poco serio !! pero bueno, por ahora zafa
+    ]);
+    
+    $opciones = [
+        'http' => [
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => $payload,
+        ]
+    ];
+    
+    $contexto  = stream_context_create($opciones);
+    $resultado = @file_get_contents($url, false, $contexto);
+    $httpCode = explode(' ', $http_response_header[0] ?? '')[1] ?? 0;
+    
+    return $httpCode;
+
+}

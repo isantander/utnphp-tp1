@@ -61,18 +61,6 @@ function controller_modificar_datacenter($data, $method) {
 
 }
 
-/* function controller_listar_datacenter() {
-
-    $success = model_listar_datacenter();
- 
-    if ($success) {
-        json_response(['data' => $success],200);
-    } else {
-        json_response(null,404);
-    }
-
-} */
- 
 function controller_listar_datacenter($data, $method) {
 
     $page = $data['page'] ?? 1;
@@ -87,12 +75,18 @@ function controller_listar_datacenter($data, $method) {
     }
 }
 
-function controller_obtener_datacenter($data, $method) {
+function controller_listarTodo_datacenter($data, $method) {
 
-    if ($method !== 'POST') {
-        json_response(null,405);
-        return;
+    $respuesta = model_listarTodo_datacenter();
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
     }
+}
+
+function controller_obtener_datacenter($data, $method) {
 
     $id = $data['id'] ?? null;
 

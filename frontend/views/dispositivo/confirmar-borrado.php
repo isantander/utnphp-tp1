@@ -34,4 +34,4 @@ $dispositivo = $response['data'];
         </div>
     </form>
 </div>
-
+ 

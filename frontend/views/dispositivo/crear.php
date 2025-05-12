@@ -1,6 +1,6 @@
 <?php
 function getApiData($endpoint) {
-    $json = @file_get_contents("http://localhost:8000/api/index.php?accion=listar&entidad=$endpoint");
+    $json = @file_get_contents("http://localhost:8000/api/index.php?accion=listarTodo&entidad=$endpoint");
     return $json ? json_decode($json, true) : [];
 }
 
@@ -50,7 +50,7 @@ $tipoDispositivos = getApiData('tipodispositivo');
 ?>
 
 
-<div class="bg-white shadow-md rounded-lg p-8 max-w-2xl w-full">
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-6 text-center">Crear Nuevo Dispositivo</h2>
     <form method="POST" class="space-y-5">
 

@@ -58,19 +58,7 @@ function controller_modificar_tipodispositivo($data, $method) {
 
 }
 
-/* function controller_listar_tipodispositivos() {
-
-    $success = model_listar_tipo_dispositivos();
-
-    if ($success) {
-        json_response(['data' => $success],200);
-    } else {
-        json_response(null,404);
-    }
-} */
-
 function controller_listar_tipodispositivo($data, $method) {
-
 
     $page = $data['page'] ?? 1;
     $limit = $data['limit'] ?? 10;
@@ -84,6 +72,17 @@ function controller_listar_tipodispositivo($data, $method) {
     }
 }
 
+function controller_listarTodo_tipodispositivo($data, $method) {
+
+    $respuesta = model_listarTodo_tipo_dispositivo();
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
+    
+}
 
 function controller_obtener_tipodispositivo($data) {
 

@@ -59,23 +59,24 @@ function controller_modificar_fabricante($data, $method) {
 
 }
 
-/* function controller_listar_fabricante() {
-
-    $success = model_listar_fabricantes();
-
-    if ($success) {
-        json_response(['data' => $success],200);
-    } else {
-        json_response(null,404);
-    }
-} */
-
 function controller_listar_fabricante($data, $method) {
 
     $page = $data['page'] ?? 1;
     $limit = $data['limit'] ?? 10;
 
     $respuesta = service_listar_fabricante($page, $limit);
+
+    if ($respuesta === false) {
+        json_response(null, 500);
+    } else {
+        json_response($respuesta, 200);
+    }
+    
+}
+
+function controller_listarTodo_fabricante() {
+
+    $respuesta = model_listarTodo_fabricante();
 
     if ($respuesta === false) {
         json_response(null, 500);

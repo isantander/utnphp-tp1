@@ -1,6 +1,9 @@
 <?php
+
+/// Esto debe estar afuera de la vista
 function getApiData($endpoint) { 
-    $json = @file_get_contents("http://localhost:8000/api/index.php?accion=listar&entidad=$endpoint");
+    // tengo que crear un endpoint que liste todo, para cargar en las listas desplegables
+    $json = @file_get_contents("http://localhost:8000/api/index.php?accion=listarTodo&entidad=$endpoint");
     return $json ? json_decode($json, true) : [];
 }
 
@@ -9,44 +12,20 @@ function getDispositivo($id) {
     return $json ? json_decode($json, true) : [];
 }
 
-function updateDispositivo($id, $data) {
-    $url = "http://localhost:8000/api/index.php?accion=modificar&entidad=dispositivo";
 
-    $opciones = [
-        'http' => [
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'POST',
-            'content' => json_encode($data),
-        ]
-    ];
-
-    $contexto = stream_context_create($opciones);
-    $resultado = @file_get_contents($url, false, $contexto);
-    print_r($resultado);
-
-    if ($resultado === FALSE) {
-        return ['success' => false, 'message' => 'Error al conectar con la API.'];
-    }
-
-    $httpCode = explode(' ', $http_response_header[0])[1] ?? 0;
-    if ($httpCode == 200) {
-        return ['success' => true, 'message' => 'Dispositivo actualizado correctamente.'];
-    }
-
-    return ['success' => false, 'message' => 'Error al actualizar el dispositivo. Código: ' . $httpCode];
-}
-
-$feedback = null;
 
 if (!$id) die("Falta el parámetro ID");
+
 
 $dispositivo = getDispositivo($id)['data'] ?? null;
 
 if (!$dispositivo) die("Dispositivo no encontrado");
 
+//cargar entidades referenciadas
 $fabricantes = getApiData('fabricante');
 $racks = getApiData('rack');
 $tipoDispositivos = getApiData('tipodispositivo');
+
 ?>
 
 
@@ -124,31 +103,12 @@ $tipoDispositivos = getApiData('tipodispositivo');
                 </select>
             </div>
 
-            <div class="flex justify-end">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded">
-                    Guardar Cambios
-                </button>
+            <div class="flex justify-end mt-4">
+                <a href='/datacenter/listar' class='px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300'>
+                        Volver
+                </a>
             </div>
         
     </div>
-
-    <!-- modal flowbyte  -->
-    <div id="successModal" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal h-full">
-    <div class="relative w-full max-w-md h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-green-500 w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <h3 class="mb-5 text-lg font-normal text-gray-700 dark:text-gray-400">
-                    Dispositivo modificado correctamente
-                </h3>
-                <p class="text-sm text-gray-500">Redirigiendo...</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-</body>
+ 
 </html>

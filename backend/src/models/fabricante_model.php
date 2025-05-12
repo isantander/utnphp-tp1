@@ -44,19 +44,6 @@ function model_modificar_fabricante($id,$nombre) {
     }
 }
 
-/* function model_listar_fabricantes() {
-
-    try {
-        $pdo = getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM Fabricante WHERE deleted IS NULL");
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        return false;
-    }
-} */
-
 function model_listar_fabricante($limit, $offset) {
 
     try {
@@ -74,6 +61,25 @@ function model_listar_fabricante($limit, $offset) {
         return [
             'data' => $data,
             'total' => $total
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
+    
+}
+
+function model_listarTodo_fabricante() {
+
+    try {
+        $pdo = getConnection();
+
+        $stmt = $pdo->prepare("SELECT * FROM Fabricante WHERE deleted IS NULL");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
         ];
 
     } catch (PDOException $e) {

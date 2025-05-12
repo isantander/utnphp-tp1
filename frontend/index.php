@@ -8,7 +8,7 @@ $entidad = $baseURL[1] ?? 'menu';
 $accion = $baseURL[2] ?? 'home';
 $id = $baseURL[3] ?? null;
 
-$acciones_permitidas = ['home','listar', 'obtener', 'crear', 'modificar', 'eliminar','confirmar-borrado'];
+$acciones_permitidas = ['home','listar', 'mostrar', 'crear', 'modificar', 'eliminar','confirmar-borrado'];
 $entidades_permitidas = ['menu','datacenter', 'dispositivo', 'rack', 'fabricante', 'tipodispositivo'];
 
 if ( !in_array($accion, $acciones_permitidas) || 

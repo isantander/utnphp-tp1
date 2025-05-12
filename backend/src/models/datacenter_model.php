@@ -57,19 +57,6 @@ function model_modificar_datacenter($id,$nombre, $ubicacion, $descripcion) {
 
 }
 
-/* function model_listar_datacenter() {
-
-    try {
-        $pdo = getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM Datacenter WHERE deleted IS NULL");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log("Error al obtener datacenter: " . $e->getMessage());
-        return [];
-    }
-
-} */
 
 function model_listar_datacenter($limit, $offset) {
     try {
@@ -94,6 +81,22 @@ function model_listar_datacenter($limit, $offset) {
     }
 }
 
+function model_listarTodo_datacenter() {
+    try {
+        $pdo = getConnection();
+
+        $stmt = $pdo->prepare("SELECT * FROM Datacenter WHERE deleted IS NULL");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 
 function model_obtener_datacenter($id) {
 

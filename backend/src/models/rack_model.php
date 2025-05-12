@@ -56,17 +56,6 @@ function model_modificar_rack($id,$id_datacenter, $numero, $descripcion) {
     }
 }
 
-/* function model_listar_racks() {
-    try {
-        $pdo = getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM Rack WHERE deleted IS NULL");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        return false;
-    }
-} */
-
 function model_listar_rack($limit, $offset) {
     
     try {
@@ -75,7 +64,6 @@ function model_listar_rack($limit, $offset) {
         $stmtTotal = $pdo->query("SELECT COUNT(*) FROM Rack WHERE deleted IS NULL");
         $total = (int)$stmtTotal->fetchColumn();
 
-        //$stmt = $pdo->prepare("SELECT  FROM Rack WHERE deleted IS NULL LIMIT :limit OFFSET :offset");
         $stmt = $pdo->prepare("SELECT R.id, D.nombre as datacenter, R.numero, R.descripcion 
                                         FROM Rack as R
                                         INNER JOIN Datacenter as D ON R.id_datacenter = D.id
@@ -95,6 +83,24 @@ function model_listar_rack($limit, $offset) {
     }
 }
 
+function model_listarTodo_rack() {
+    
+    try {
+
+        $pdo = getConnection();
+
+        $stmt = $pdo->prepare("SELECT id, descripcion FROM Rack WHERE deleted IS NULL");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 
 function model_obtener_rack($id) {
     try {

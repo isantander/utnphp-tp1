@@ -50,17 +50,6 @@ function model_modificar_tipo_dispositivo($id,$descripcion) {
     }
     
 }
-/* function model_listar_tipo_dispositivo() {
-    try {
-        $pdo = getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM TipoDispositivo WHERE deleted IS NULL");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log("Error al listar tipo dispositivo: " . $e->getMessage());
-        return false;
-    }
-} */
 
 function model_listar_tipo_dispositivo($limit, $offset) {
 
@@ -87,6 +76,24 @@ function model_listar_tipo_dispositivo($limit, $offset) {
 
 }
 
+function model_listarTodo_tipo_dispositivo() {
+
+    try {
+        $pdo = getConnection();
+
+        $stmt = $pdo->prepare("SELECT * FROM TipoDispositivo WHERE deleted IS NULL");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'data' => $data,
+        ];
+
+    } catch (PDOException $e) {
+        return false;
+    }
+
+}
 
 function model_obtener_tipo_dispositivo($id) {
     try {
