@@ -1,13 +1,12 @@
 # Instrucciones para la instalación del Sistema
 
-## Instalar tailwindcss
+## Instalar tailwindcss con sus dependencias y flowbite. Ya viene configurado el package.json
 
 ```bash
-npm init -y
 npm install
 ```
 
-### Compilar con tailwindcss
+### Compilar css de tailwindcss
 
 ```bash
 npm run build
